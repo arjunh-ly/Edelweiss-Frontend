@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import colors from "../styles/colors";
 
-const PRIMARY = "#034EA2";
 const CARD_BORDER = "#D9E7F6";
 
 const faqData = [
@@ -63,13 +63,13 @@ const FAQSection = () => {
     <section id="faqs-section" className="w-full py-10">
       <div className="max-w-[1180px] mx-auto px-4">
         <div>
-          <h3 className="text-[#111827] text-[22px] font-semibold leading-7">
+          <h3 className="text-[#111827] text-[24px] font-semibold leading-7">
             Frequently Asked Questions (FAQs)
           </h3>
 
           <div
             className="mt-2 w-[110px] h-[3px] rounded-full"
-            style={{ backgroundColor: PRIMARY }}
+            style={{ backgroundColor: colors.primary }}
           />
         </div>
 
@@ -88,11 +88,11 @@ const FAQSection = () => {
                   onClick={() => toggle(index)}
                   className="w-full flex items-center justify-between text-left px-4 py-3"
                 >
-                  <p className="text-[#111827] text-[15px] font-semibold">
+                  <p className="text-[#111827] text-[16px] font-semibold">
                     {item.question}
                   </p>
 
-                  <span className="text-[#6B7280]">
+                  <span className="text-[#6B7280] bg-white shadow-md p-2 rounded-full ">
                     {isOpen ? (
                       <ChevronUp size={20} />
                     ) : (
@@ -103,7 +103,7 @@ const FAQSection = () => {
 
                 {isOpen && (
                   <div className="px-4 pb-4">
-                    <p className="text-[#6B7280] text-[14px] leading-6">
+                    <p className="text-[#6B7280] text-[16px] leading-6">
                       {item.answer}
                     </p>
                   </div>

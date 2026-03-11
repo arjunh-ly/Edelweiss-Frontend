@@ -1,5 +1,3 @@
-import React from "react";
-
 import fundIcon from "../assets/fund.png";
 import cagrIcon from "../assets/cagr.png";
 import benchmarkIcon from "../assets/benchmark.png";

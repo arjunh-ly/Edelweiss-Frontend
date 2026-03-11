@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import {ChevronRight} from "lucide-react"
+import colors from "../styles/colors";
 import investor1 from "../assets/investor-1.png";
 import investor2 from "../assets/investor-2.png";
 import investor3 from "../assets/investor-3.png";
 import doubleIcon from "../assets/Double.png";
 
-const PRIMARY = "#034EA2";
-const CARD_BORDER = "#EEF2F7";
 const CARD_SHADOW = "0 10px 30px rgba(15, 23, 42, 0.08)";
 
 const testimonialsData = [
@@ -52,25 +52,23 @@ const InvestorTestimonialsSection = () => {
       <div className="max-w-[1180px] mx-auto px-4">
         <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div>
-            <h3 className="text-[#111827] text-[22px] font-semibold leading-7">
+            <h3 className="text-[#111827] text-[24px] font-semibold leading-7">
               What Our Investors Say
             </h3>
             <div
-              className="mt-2 w-[110px] h-[3px] rounded-full"
-              style={{ backgroundColor: PRIMARY }}
+              className="mt-2 w-[110px] h-[3px] rounded-full bg-primary"
             />
-            <p className="mt-3 text-[#374151] text-[15px] leading-6">
+            <p className="mt-3 text-[#374151] text-[16px] leading-6">
               Join thousands of satisfied investors who trust us with their wealth
             </p>
           </div>
 
           <button
             type="button"
-            className="h-[44px] px-6 rounded-[14px] border text-[14px] font-semibold text-[#0B63CE] hover:bg-[#F8FBFF] transition inline-flex items-center gap-3 self-start"
-            style={{ borderColor: "#0B63CE" }}
+            className="h-[44px] px-10 rounded-[14px] border border-[#034EA2] text-[14px] font-semibold text-[#0B63CE] bg-transparent hover:bg-[#0B63CE] hover:text-white transition-all duration-300 inline-flex items-center gap-3 self-start"
           >
             Share your thoughts
-            <span className="text-[18px] leading-none">›</span>
+          <ChevronRight size={19} className="shrink-0" />
           </button>
         </div>
 
@@ -80,21 +78,21 @@ const InvestorTestimonialsSection = () => {
               key={item.id}
               className="bg-white rounded-2xl border px-6 py-5"
               style={{
-                borderColor: CARD_BORDER,
+                borderColor: colors.cardBorder,
                 boxShadow: CARD_SHADOW,
               }}
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-[46px] h-[46px] object-contain"
+                className="w-[65px] h-[65px] object-contain"
               />
 
               <div className="mt-5">
                 <QuoteIcon />
               </div>
 
-              <p className="mt-3 text-[#111827] text-[15px] leading-7 min-h-[144px]">
+              <p className="mt-3 text-[#111827] text-[16px] leading-7 min-h-[144px]">
                 {item.text}
               </p>
 
@@ -104,7 +102,7 @@ const InvestorTestimonialsSection = () => {
                   <p className="text-[#111827] text-[14px] leading-5 font-medium">
                     {item.name}
                   </p>
-                  <p className="text-[#374151] text-[13px] leading-5 mt-1">
+                  <p className="text-[#374151] text-[14px] leading-5 mt-1">
                     {item.meta}
                   </p>
                 </div>
@@ -124,7 +122,7 @@ const InvestorTestimonialsSection = () => {
                 active === index ? "w-[56px] h-[5px]" : "w-[9px] h-[9px]",
               ].join(" ")}
               style={{
-                backgroundColor: active === index ? PRIMARY : "#E5EDF5",
+                backgroundColor: active === index ? colors.primary : "#E5EDF5",
               }}
             />
           ))}

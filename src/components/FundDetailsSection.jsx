@@ -1,7 +1,5 @@
 // src/components/FundDetailsSection.jsx
-import React from "react";
-import objectiveImg from "../assets/risk-badge.png"; // use correct banner image
-// import badgeImg from "../assets/risk-badge.png"; // if you want the small badge near title
+import objectiveImg from "../assets/risk-badge.png";
 
 const Row = ({ label, value, boldValue }) => (
   <div className="flex items-center justify-between gap-6 py-4 border-b border-[#D6F0C8]">
@@ -26,7 +24,7 @@ const FundDetailsSection = () => {
           <h3 className="text-[#111827] text-[24px] font-semibold leading-7">
             Fund Details
           </h3>
-          <div className="mt-2 w-[86px] h-[3px] bg-[#034EA2] rounded-full" />
+          <div className="mt-2 w-[120px] h-[3px] bg-[#034EA2] rounded-full" />
           <p className="mt-2 text-[#6B7280] text-[16px] leading-5">
             Everything you need to know about the fund
           </p>
@@ -81,7 +79,7 @@ const FundDetailsSection = () => {
         </div>
 
         {/* Investment Objective banner */}
-        <div className="mt-8 bg-[#034EA2] rounded-2xl shadow-md overflow-hidden">
+        <div className="mt-8 bg-[#034EA2] px-8 rounded-2xl shadow-md overflow-hidden">
           {/* Use flex so image never gets cut */}
           <div className="flex flex-col md:flex-row">
             {/* Left */}
@@ -91,21 +89,14 @@ const FundDetailsSection = () => {
                   Investment Objective
                 </div>
 
-                {/*
-                <img
-                  src={badgeImg}
-                  alt="Risk badge"
-                  className="w-8 h-8 object-contain"
-                />
-                */}
               </div>
 
-              <div className="mt-2 w-[92px] h-[2px] bg-white/70 rounded-full" />
+              <div className="mt-2 w-[88px] h-[2px] bg-white/70 rounded-full" />
 
               <p className="mt-4 text-white/90 text-[16px] sm:text-[13px] leading-6 max-w-[540px]">
                 The primary investment objective of the scheme is to generate
                 long term capital appreciation by investing in an actively
-                managed portfolio predominantly consisting of Equity &amp;
+                managed portfolio predominantly consisting of Equity &
                 equity related securities diversified over various sectors.
               </p>
             </div>

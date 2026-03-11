@@ -1,9 +1,9 @@
-import React from "react";
+import colors from "../styles/colors";
 
 const StepBadge = ({ number }) => {
   return (
-    <div className="w-[70px] h-[70px] sm:w-[78px] sm:h-[78px] rounded-full border-2 border-dashed border-[#034EA2] flex items-center justify-center shrink-0">
-      <div className="w-[50px] h-[50px] sm:w-[56px] sm:h-[56px] rounded-full bg-[#034EA2] flex items-center justify-center">
+    <div className="w-[70px] h-[70px] sm:w-[78px] sm:h-[78px] rounded-full border-2 border-dashed border-primary flex items-center justify-center shrink-0">
+      <div className="w-[50px] h-[50px] sm:w-[56px] sm:h-[56px] rounded-full bg-primary flex items-center justify-center">
         <span className="text-white text-[18px] sm:text-[20px] font-semibold">
           {number}
         </span>
@@ -32,7 +32,7 @@ const InvestStepsSection = () => {
             How to invest in Edelweiss Flexi Cap Fund?
           </h3>
 
-          <div className="w-[140px] h-[3px] bg-[#034EA2] rounded-full mt-3" />
+          <div className="w-[140px] h-[3px] bg-primary rounded-full mt-3" />
 
           {/* DESKTOP/TABLET */}
           <div className="relative mt-4 sm:mt-8 h-[260px] hidden md:block">
@@ -44,7 +44,7 @@ const InvestStepsSection = () => {
               <path
                 d="M140 110 L430 185 L660 110 L890 185"
                 fill="none"
-                stroke="#034EA2"
+                stroke={colors.primary}
                 strokeWidth="2"
                 strokeDasharray="6 8"
                 strokeLinecap="round"
@@ -99,7 +99,7 @@ const InvestStepsSection = () => {
           <div className="md:hidden mt-10">
             <div className="relative">
               <div className="absolute left-[34px] top-[40px] bottom-[40px] w-[2px]">
-                <div className="w-full h-full border-l-2 border-dashed border-[#034EA2]" />
+                <div className="w-full h-full border-l-2 border-dashed border-primary" />
               </div>
 
               <div className="flex gap-5 items-start py-6">

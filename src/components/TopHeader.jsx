@@ -1,14 +1,13 @@
-import React from "react";
 import logo from "../assets/logo.png";
 
 const TopHeader = () => {
   return (
     <div className="w-full bg-white">
-      <div className="w-full px-12 py-3 flex items-center justify-start">
+      <div className="w-full px-12 py-2 flex items-center justify-start">
         <img
           src={logo}
           alt="Edelweiss"
-          className="h-14 w-auto object-contain ml-2"
+          className="h-16 w-auto object-contain ml-2"
         />
       </div>
     </div>

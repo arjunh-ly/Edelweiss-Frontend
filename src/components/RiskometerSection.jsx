@@ -1,5 +1,5 @@
 // src/components/RiskometerSection.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import riskometerImg from "../assets/riskometer.png";
 
 const RiskometerSection = () => {
@@ -28,7 +28,7 @@ const RiskometerSection = () => {
               are seeking:
             </h3>
 
-            <div className="mt-3 w-[210px] h-[3px] bg-[#034EA2] rounded-full" />
+            <div className="mt-3 w-[120px] h-[3px] bg-[#034EA2] rounded-full" />
 
             <ul className="mt-7 space-y-3 text-[#111827] text-[16px] leading-6 list-disc pl-5">
               <li>Long Term Capital Growth</li>
@@ -41,7 +41,7 @@ const RiskometerSection = () => {
               </li>
             </ul>
 
-            <p className="mt-8 text-[#111827] text-[12px] leading-5">
+            <p className="mt-8 text-[#111827] text-[16px] leading-5">
               * Investors should consult their financial advisors if in
               <br />
               doubt about whether the product is suitable for them
@@ -57,7 +57,7 @@ const RiskometerSection = () => {
                   type="button"
                   onClick={() => setActive("scheme")}
                   className={[
-                    "flex-1 text-[16px] sm:text-[13px] font-medium rounded-md py-2 transition outline-none focus:outline-none",
+                    "flex-1 text-[12px] sm:text-[13px] font-medium rounded-md py-2 transition outline-none focus:outline-none",
                     active === "scheme"
                       ? "bg-white border border-[#034EA2] text-[#111827]"
                       : "bg-transparent text-[#111827] opacity-70",
@@ -70,7 +70,7 @@ const RiskometerSection = () => {
                   type="button"
                   onClick={() => setActive("benchmark")}
                   className={[
-                    "flex-1 text-[16px] sm:text-[13px] font-medium rounded-md py-2 transition outline-none focus:outline-none",
+                    "flex-1 text-[12px] sm:text-[13px] font-medium rounded-md py-2 transition outline-none focus:outline-none",
                     active === "benchmark"
                       ? "bg-white border border-[#034EA2] text-[#111827]"
                       : "bg-transparent text-[#111827] opacity-70",

@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { ChevronRight } from "lucide-react";
 import {
   Chart,
   PieController,
@@ -6,11 +7,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import colors from "../styles/colors";
 
 Chart.register(PieController, ArcElement, Tooltip, Legend);
 
-const PRIMARY = "#034EA2";
-const CARD_BORDER = "#EEF2F7";
+const CARD_BORDER = colors.cardBorder;
 const CARD_SHADOW = "0 10px 30px rgba(15, 23, 42, 0.08)";
 
 const sectorAllocations = [
@@ -66,19 +67,6 @@ const topHoldings = [
   },
 ];
 
-const SectionHeading = ({ title }) => {
-  return (
-    <div>
-      <h3 className="text-[#111827] text-[22px] font-semibold leading-7">
-        {title}
-      </h3>
-      <div
-        className="mt-2 w-[110px] h-[3px] rounded-full"
-        style={{ backgroundColor: PRIMARY }}
-      />
-    </div>
-  );
-};
 
 const PortfolioBreakdownSection = () => {
   const canvasRef = useRef(null);
@@ -144,20 +132,7 @@ const PortfolioBreakdownSection = () => {
               },
             },
             legend: {
-              position: "right",
-              align: "center",
-              labels: {
-                usePointStyle: true,
-                pointStyle: "circle",
-                boxWidth: 10,
-                boxHeight: 10,
-                padding: 18,
-                color: "#374151",
-                font: {
-                  size: 13,
-                  weight: "500",
-                },
-              },
+              display: false,
             },
           },
         },
@@ -197,10 +172,10 @@ const PortfolioBreakdownSection = () => {
             }}
           >
             <div className="flex items-start justify-between gap-4">
-              <h4 className="text-[#111827] text-[18px] font-semibold leading-6">
+              <h4 className="text-[#111827] text-[20px] font-semibold leading-6">
                 Sector Allocations
               </h4>
-              <p className="text-[#9CA3AF] text-[13px] leading-5 whitespace-nowrap">
+              <p className="text-[#9CA3AF] text-[16px] leading-5 whitespace-nowrap">
                 (As on 31 Jan 2026)
               </p>
             </div>
@@ -211,10 +186,10 @@ const PortfolioBreakdownSection = () => {
                   key={item.name}
                   className="flex items-center justify-between gap-4 py-4"
                 >
-                  <p className="text-[#111827] text-[15px] leading-6">
+                  <p className="text-[#111827] text-[16px] leading-6">
                     {item.name}
                   </p>
-                  <p className="text-[#111827] text-[15px] font-medium leading-6">
+                  <p className="text-[#111827] text-[16px] font-medium leading-6">
                     {item.value}
                   </p>
                 </div>
@@ -224,9 +199,9 @@ const PortfolioBreakdownSection = () => {
             <div className="mt-5 flex justify-end">
               <button
                 type="button"
-                className="text-[14px] font-semibold text-[#0B63CE] hover:opacity-80 transition"
+                className="text-[14px] font-semibold text-[#0B63CE] hover:opacity-80 transition flex items-center gap-1"
               >
-                View all sectors &gt;
+                View all sectors <ChevronRight size={15} className="shrink-0" />
               </button>
             </div>
           </div>
@@ -238,19 +213,33 @@ const PortfolioBreakdownSection = () => {
               boxShadow: CARD_SHADOW,
             }}
           >
-            <h4 className="text-[#111827] text-[18px] font-semibold leading-6">
+            <h4 className="text-[#111827] text-[20px] font-semibold leading-6">
               Market Cap Allocations
             </h4>
 
-            <div className="mt-4 flex items-center justify-center">
-              <div className="w-full max-w-[360px] h-[260px] sm:h-[280px] min-w-0 relative">
+            <div className="mt-4 flex items-center justify-center gap-6">
+              <div className="w-[200px] h-[200px] sm:w-[220px] sm:h-[220px] shrink-0 relative">
                 <canvas ref={canvasRef} />
               </div>
-            </div>
 
-            <p className="mt-2 text-center text-[#111827] text-[14px] leading-5">
-              Market Cap
-            </p>
+              <div className="flex flex-col gap-3">
+                {marketCapData.labels.map((label, i) => (
+                  <div key={label} className="flex items-center gap-2">
+                    <span
+                      className="shrink-0 h-[10px] rounded-full"
+                      style={{ width: "30px", backgroundColor: marketCapData.colors[i] }}
+                    />
+                    <span className="text-[#374151] text-[13px] font-medium whitespace-nowrap">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              
+            </div>
+              <div className="ml-40 mt-8">Market Cap</div>
+
+           
           </div>
         </div>
 
@@ -270,7 +259,7 @@ const PortfolioBreakdownSection = () => {
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[760px] border-collapse">
               <thead>
-                <tr className="bg-[#EAF3FB]">
+                <tr className="bg-[#EAF3FB] h-[59px]">
                   <th className="text-left px-6 py-4 text-[#111827] text-[20px] font-semibold">
                     Name
                   </th>
@@ -320,9 +309,9 @@ const PortfolioBreakdownSection = () => {
           <div className="px-6 py-4 flex justify-end">
             <button
               type="button"
-              className="text-[14px] font-semibold text-[#0B63CE] hover:opacity-80 transition"
+              className="text-[14px] font-semibold text-[#0B63CE] hover:opacity-80 transition flex items-center gap-1"
             >
-              View all holdings &gt;
+              View all holdings <ChevronRight size={15} className="shrink-0" />
             </button>
           </div>
         </div>

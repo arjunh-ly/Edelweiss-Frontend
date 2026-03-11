@@ -1,6 +1,7 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import colors from "../styles/colors";
 
-const PRIMARY = "#034EA2";
+const PRIMARY = colors.primary;
 const INVESTED = "#A154A1";
 const RETURNS = "#32BCAD";
 
@@ -70,12 +71,13 @@ const Segmented = ({ tabs, value, onChange }) => {
             key={t.value}
             type="button"
             onClick={() => onChange(t.value)}
-            className="flex-1 h-[52px] rounded-xl text-[16px] font-medium transition-all duration-500 ease-in-out border-0 outline-none focus:outline-none"
+            className="flex-1 h-[40px] rounded-xl text-[16px]  transition-all duration-500 ease-in-out border-0 outline-none focus:outline-none"
             style={{
               backgroundColor: active ? "#FFFFFF" : "transparent",
               color: "#111827",
               boxShadow: active ? "0 10px 26px rgba(0,0,0,0.10)" : "none",
               border: active ? `1px solid ${PRIMARY}` : "1px solid transparent",
+              fontWeight: active ? 500: 200
             }}
           >
             {t.label}
@@ -106,7 +108,7 @@ const RangeRow = ({
         </div>
 
         <div
-          className={`bg-white rounded-[18px] shadow-[0_6px_18px_rgba(0,0,0,0.08)] px-5 h-[56px] flex items-center justify-between shrink-0 ${inputWidthClass}`}
+          className={`bg-white rounded-[10px] shadow-[0_6px_18px_rgba(0,0,0,0.08)] px-3 h-[40px] flex items-center justify-between shrink-0 ${inputWidthClass}`}
         >
           <input
             className="w-full text-[#111827] text-[18px] font-semibold outline-none border-0 bg-transparent"
@@ -145,13 +147,52 @@ const Pie = ({ invested, returns }) => {
   const investedPct = clamp((invested / total) * 100, 0, 100);
   const bg = `conic-gradient(${INVESTED} 0 ${investedPct}%, ${RETURNS} ${investedPct}% 100%)`;
 
+  const [tooltip, setTooltip] = useState(null);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    // angle in degrees, 0 = top, clockwise
+    let angle = (Math.atan2(dx, -dy) * 180) / Math.PI;
+    if (angle < 0) angle += 360;
+    const isInvested = angle < investedPct * 3.6;
+    setTooltip({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      segment: isInvested ? "invested" : "returns",
+    });
+  };
+
   return (
     <div className="flex items-center justify-center">
-      <div
-        className="w-[220px] h-[220px] rounded-full"
-        style={{ background: bg }}
-        aria-label="Investment split chart"
-      />
+      <div className="relative">
+        <div
+          className="w-[220px] h-[220px] rounded-full cursor-pointer"
+          style={{ background: bg }}
+          aria-label="Investment split chart"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setTooltip(null)}
+        />
+        {tooltip && (
+          <div
+            className="absolute pointer-events-none z-10 bg-white rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.14)] px-3 py-2 text-[13px] whitespace-nowrap"
+            style={{
+              left: tooltip.x + 12,
+              top: tooltip.y - 10,
+            }}
+          >
+            <div className="text-[#6B7280]">
+              {tooltip.segment === "invested" ? "Invested Amount" : "Estimated Returns"}
+            </div>
+            <div className="font-semibold text-[#111827]">
+              ₹{fmtINR(tooltip.segment === "invested" ? invested : returns)}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -159,13 +200,14 @@ const Pie = ({ invested, returns }) => {
 const SplitBar = ({ invested, returns }) => {
   const total = Math.max(1, invested + returns);
   const investedPct = clamp((invested / total) * 100, 0, 100);
-  const returnsPct = 100 - investedPct;
 
   return (
     <div className="w-full">
-      <div className="w-full h-[18px] rounded-full overflow-hidden bg-[#EDEFF3] flex">
-        <div style={{ width: `${investedPct}%`, background: INVESTED }} />
-        <div style={{ width: `${returnsPct}%`, background: RETURNS }} />
+      <div className="w-full h-[18px] rounded-full relative" style={{ background: RETURNS }}>
+        <div
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{ width: `${investedPct}%`, background: INVESTED }}
+        />
       </div>
 
       <div className="mt-4 flex items-center justify-between gap-6">
@@ -312,7 +354,7 @@ const ReturnsCalculator = () => {
                 {mode !== "sip" ? (
                   <div className="mt-10">
                     <div className="flex items-center justify-between gap-4">
-                      <div className="text-[#111827] text-[16px] font-medium leading-[1.3]">
+                      <div className="text-[#111827] text-[16px] font-semibold leading-[1.3]">
                         Expected Return Rate
                       </div>
 
@@ -354,13 +396,13 @@ const ReturnsCalculator = () => {
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
                   <div className="text-[#111827]">
-                    <div className="text-[14px] text-[#6B7280]">
+                    <div className="text-[16px] text-[#6B7280]  font-semibold">
                       {mode === "goal"
                         ? "Estimated Monthly SIP"
                         : "Expected Return Rate"}
                     </div>
 
-                    <div className="text-[22px] font-semibold">
+                    <div className="text-[16px] font-semibold">
                       {mode === "goal"
                         ? `₹${fmtINR(computed.monthly || 0)}`
                         : `${rate}% p.a.`}
@@ -369,7 +411,7 @@ const ReturnsCalculator = () => {
 
                   <button
                     type="button"
-                    className="h-[54px] w-full sm:w-[260px] rounded-xl text-white font-medium border-0 outline-none focus:outline-none bg-[#034EA2] hover:bg-[#8DC63F] transition-colors duration-300 active:scale-[0.98]"
+                    className="h-[40px] w-full sm:w-[260px] rounded-xl text-white font-medium border-0 outline-none focus:outline-none bg-[#034EA2] hover:bg-[#8DC63F] transition-colors duration-300 active:scale-[0.98]"
                   >
                     Start a SIP
                   </button>
@@ -377,16 +419,16 @@ const ReturnsCalculator = () => {
               </div>
 
               <div className="bg-white rounded-[18px] p-5 sm:p-7 shadow-[0_10px_26px_rgba(0,0,0,0.08)]">
-                <div className="text-[#111827] text-[18px] font-semibold">
+                <div className="text-[#111827] text-[16px] font-semibold">
                   Investment Summary
                 </div>
 
-                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:items-center">
+                <div className=" grid grid-cols-1 sm:grid-cols-2 gap-6 sm:items-center">
                   <div className="flex items-center gap-4">
                     <div className="text-[#111827] text-[16px] font-medium">
                       {titleValue.label}
                     </div>
-                    <div className="text-[#111827] text-[18px] font-semibold">
+                    <div className="text-[#111827] text-[16px] font-semibold">
                       ₹{fmtINR(titleValue.value)}
                     </div>
                   </div>

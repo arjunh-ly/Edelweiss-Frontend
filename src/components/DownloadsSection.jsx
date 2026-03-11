@@ -1,9 +1,8 @@
-import React from "react";
 import downloadIcon from "../assets/document-outline.png";
 import { Download } from "lucide-react";
+import colors from "../styles/colors";
 
-const PRIMARY = "#034EA2";
-const CARD_BORDER = "#EEF2F7";
+const CARD_BORDER = colors.cardBorder;
 const CARD_SHADOW = "0 10px 30px rgba(15, 23, 42, 0.06)";
 
 const downloads = [
@@ -20,12 +19,12 @@ const DownloadsSection = () => {
     <section className="w-full py-10">
       <div className="max-w-[1180px] mx-auto px-4">
         <div>
-          <h3 className="text-[#111827] text-[22px] font-semibold leading-7">
+          <h3 className="text-[#111827] text-[24px] font-semibold leading-7">
             Downloads
           </h3>
           <div
-            className="mt-2 w-[84px] h-[3px] rounded-full"
-            style={{ backgroundColor: PRIMARY }}
+            className="mt-2 w-[120px] h-[3px] rounded-full"
+            style={{ backgroundColor: colors.primary }}
           />
         </div>
 
@@ -56,7 +55,7 @@ const DownloadsSection = () => {
               </div>
 
               {/* Title */}
-              <span className="text-[#111827] text-[15px] leading-6 font-medium">
+              <span className="text-[#111827] text-[16px] leading-6 font-medium">
                 {item}
               </span>
 
@@ -66,7 +65,7 @@ const DownloadsSection = () => {
     absolute top-0 right-0
     w-[50px] h-[50px]
     bg-[#034EA2]
-    rounded-bl-[40px]
+    rounded-bl-[50px]
     scale-0
     group-hover:scale-100
     origin-top-right

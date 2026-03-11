@@ -1,5 +1,5 @@
 // src/components/PerformanceSection.jsx
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   Chart as ChartJS,
@@ -188,7 +188,7 @@ const PerformanceSection = () => {
 
   const [calcTab, setCalcTab] = useState("SIP");
   const [sipAmount, setSipAmount] = useState("5000");
-  const [sipDate, setSipDate] = useState("2026-03-07");
+  const [sipDate, setSipDate] = useState(new Date().toISOString().split("T")[0]);
 
   const baseNAV = useMemo(() => makeDummyMonthlySeries(), []);
   const navFiltered = useMemo(
@@ -294,7 +294,7 @@ const PerformanceSection = () => {
         <div className="mt-5 flex flex-col gap-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div
-              className="min-w-[500px] bg-white rounded-[18px] flex gap-[2px]"
+              className="w-full lg:max-w-[500px] bg-white rounded-[18px] flex gap-[2px]"
               style={{
                 boxShadow:
                   "0 1px 2px rgba(16,24,40,0.06), 0 2px 10px rgba(16,24,40,0.08)",

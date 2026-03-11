@@ -1,5 +1,5 @@
 // src/components/PortfolioSection.jsx
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Chart,
   LineController,
@@ -11,7 +11,6 @@ import {
   Legend,
   Filler,
 } from "chart.js";
-
 Chart.register(
   LineController,
   LineElement,
@@ -23,7 +22,6 @@ Chart.register(
   Filler
 );
 
-const PRIMARY = "#034EA2";
 const FUND_LINE = "#7BC043"; // green
 const BENCH_LINE = "#F97316"; // orange
 
@@ -36,10 +34,9 @@ const TogglePill = ({ activeKey, setActiveKey }) => {
         className={[
           "flex-1 rounded-lg py-1 text-[16px] font-semibold transition",
           activeKey === "years"
-            ? "text-white"
+            ? "text-white bg-primary"
             : "text-[#111827] bg-white hover:bg-[#F8FAFC]",
         ].join(" ")}
-        style={activeKey === "years" ? { backgroundColor: PRIMARY } : undefined}
       >
         Returns over the years
       </button>
@@ -50,12 +47,9 @@ const TogglePill = ({ activeKey, setActiveKey }) => {
         className={[
           "flex-1 rounded-lg py-3 text-[14px] font-semibold transition",
           activeKey === "rolling"
-            ? "text-white"
+            ? "text-white bg-primary"
             : "text-[#111827] bg-white hover:bg-[#F8FAFC]",
         ].join(" ")}
-        style={
-          activeKey === "rolling" ? { backgroundColor: PRIMARY } : undefined
-        }
       >
         Rolling Returns
       </button>
@@ -78,10 +72,9 @@ const PeriodPills = ({ active, onChange }) => {
             className={[
               "rounded-xl px-5 py-3 text-[14px] font-semibold border shadow-sm transition",
               isActive
-                ? "text-white border-transparent"
+                ? "text-white border-transparent bg-primary"
                 : "text-[#111827] bg-white border-[#EEF2F7] hover:bg-[#F8FAFC]",
             ].join(" ")}
-            style={isActive ? { backgroundColor: PRIMARY } : undefined}
           >
             {p}
           </button>
@@ -92,8 +85,6 @@ const PeriodPills = ({ active, onChange }) => {
 };
 
 const buildDataset = (labels) => {
-  // Static sample series that looks like your screenshot.
-  // You can replace these with API values later.
   const fund = [
     -8, -4, -2, 1, 6, 8, 5, 9, 12, 15, 14, 16, 20, 22, 28, 33, 36, 38, 45,
     42, 35, 28, 26, 29, 18, 31, 30, 33, 28, 30,
@@ -110,8 +101,6 @@ const buildDataset = (labels) => {
 };
 
 const getLabelsForPeriod = (period) => {
-  // Keep it simple and stable for now.
-  // You can map to real date labels later.
   if (period === "1Y") return ["Mar", "May", "Jul", "Sep", "Nov", "Jan"];
   if (period === "2Y") return ["2024 Q2", "Q3", "Q4", "2025 Q1", "Q2", "Q3"];
   if (period === "3Y") return ["2023", "2023.5", "2024", "2024.5", "2025"];
@@ -266,8 +255,7 @@ const PortfolioSection = () => {
             Portfolio
           </h3>
           <div
-            className="mt-2 w-[110px] h-[3px] rounded-full"
-            style={{ backgroundColor: PRIMARY }}
+            className="mt-2 w-[110px] h-[3px] rounded-full bg-primary"
           />
         </div>
 

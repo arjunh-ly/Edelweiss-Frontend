@@ -1,6 +1,8 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import colors from "../styles/colors";
 
-const PRIMARY = "#034EA2";
+const PRIMARY = colors.primary;
 
 const HowFundWorksSection = () => {
   const cards = useMemo(
@@ -79,7 +81,8 @@ const HowFundWorksSection = () => {
                       transition: "background-color 500ms ease, box-shadow 500ms ease",
                     }}
                   >
-                    <div className="p-6 lg:p-7 h-full flex flex-col">
+                    <div className="p-6 lg:p-7 h-full flex flex-col justify-between">
+                      {/* Top row: step circle + arrow */}
                       <div className="flex items-start justify-between gap-4">
                         <div
                           className="w-[64px] h-[64px] rounded-full flex items-center justify-center shrink-0"
@@ -89,7 +92,7 @@ const HowFundWorksSection = () => {
                           }}
                         >
                           <span
-                            className="text-[20jpx] font-semibold"
+                            className="text-[24px] font-semibold"
                             style={{
                               color: active ? PRIMARY : "#FFFFFF",
                               transition: "color 500ms ease",
@@ -102,35 +105,25 @@ const HowFundWorksSection = () => {
                         <div
                           className="text-[22px] leading-none shrink-0"
                           style={{
-                            color: active ? "#FFFFFF" : PRIMARY,
-                            transition: "color 500ms ease",
+                            color: PRIMARY,
+                            opacity: active ? 0 : 1,
+                            transition: "opacity 300ms ease",
+                            pointerEvents: "none",
                           }}
                         >
-                          ↗
+                          <ArrowUpRight size={20} />
                         </div>
                       </div>
 
-                      <div className="mt-8 flex-1 flex flex-col min-w-0">
+                      {/* Bottom: title always pinned to bottom, description expands above on active */}
+                      <div className="min-w-0">
                         <div
-                          className="text-[18px] sm:text-[20px] font-semibold break-words"
+                          className="space-y-5 hidden lg:block overflow-hidden"
                           style={{
-                            color: active ? "#FFFFFF" : PRIMARY,
-                            transition:
-                              "color 500ms ease, transform 550ms cubic-bezier(0.22, 1, 0.36, 1)",
-                            transform: active ? "translateY(0px)" : "translateY(18px)",
-                          }}
-                        >
-                          {c.title}
-                        </div>
-
-                        <div
-                          className="mt-5 space-y-5 hidden lg:block"
-                          style={{
+                            maxHeight: active ? "200px" : "0px",
                             opacity: active ? 1 : 0,
-                            transform: active ? "translateY(0px)" : "translateY(-6px)",
-                            transition:
-                              "opacity 450ms ease 120ms, transform 450ms ease 120ms",
-                            pointerEvents: active ? "auto" : "none",
+                            transition: "max-height 450ms ease 100ms, opacity 400ms ease 120ms",
+                            marginBottom: active ? "20px" : "0px",
                           }}
                         >
                           {c.desc.map((p) => (
@@ -144,23 +137,36 @@ const HowFundWorksSection = () => {
                           ))}
                         </div>
 
-                        <div className="lg:hidden mt-5">
-                          {active ? (
-                            <div className="space-y-4">
-                              {c.desc.map((p) => (
-                                <p
-                                  key={p}
-                                  className="text-[14px] leading-[24px]"
-                                  style={{ color: "rgba(255,255,255,0.92)" }}
-                                >
-                                  {p}
-                                </p>
-                              ))}
-                            </div>
-                          ) : null}
+                        <div className="lg:hidden overflow-hidden"
+                          style={{
+                            maxHeight: active ? "300px" : "0px",
+                            opacity: active ? 1 : 0,
+                            transition: "max-height 450ms ease 100ms, opacity 400ms ease 120ms",
+                            marginBottom: active ? "16px" : "0px",
+                          }}
+                        >
+                          <div className="space-y-4">
+                            {c.desc.map((p) => (
+                              <p
+                                key={p}
+                                className="text-[14px] leading-[24px]"
+                                style={{ color: "rgba(255,255,255,0.92)" }}
+                              >
+                                {p}
+                              </p>
+                            ))}
+                          </div>
                         </div>
 
-                        <div className="hidden lg:block flex-1" />
+                        <div
+                          className="text-[15px] sm:text-[18px] font-semibold break-words"
+                          style={{
+                            color: active ? "#FFFFFF" : PRIMARY,
+                            transition: "color 500ms ease",
+                          }}
+                        >
+                          {c.title}
+                        </div>
                       </div>
 
                       <button

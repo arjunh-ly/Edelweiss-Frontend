@@ -1,15 +1,12 @@
 // src/components/FundManagersSection.jsx
-import React from "react";
-
 import manager1 from "../assets/manager-1.png"; // Trideep
 import manager2 from "../assets/manager-2.png"; // Ashwani
 import manager3 from "../assets/manager-3.png"; // Raj
-
-const PRIMARY = "#034EA2";
+import { ChevronRight } from "lucide-react";
 
 const ManagerCard = ({ img, name, aum, exp, funds }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-[#EEF2F7] overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-md border border-[#EEF2F7] border-b-[7  px] border-b-primary">
       <div className="p-6 sm:p-7">
         <div className="w-[120px] h-[120px] rounded-2xl bg-[#F4F6FA] overflow-hidden">
           <img
@@ -47,14 +44,15 @@ const ManagerCard = ({ img, name, aum, exp, funds }) => {
 
         <button
           type="button"
-          className="mt-7 text-[14px] font-semibold flex items-center gap-2"
-          style={{ color: PRIMARY }}
+          className="mt-7 text-[14px] font-semibold flex items-center gap-1.5 text-primary group"
         >
-          View more details <span className="text-[14px] leading-none">›</span>
+          <span className="group-hover:underline decoration-primary underline-offset-2">
+            View more details
+          </span>
+          <ChevronRight size={19} className="shrink-0" />
         </button>
       </div>
 
-      <div className="h-[6px]" style={{ backgroundColor: PRIMARY }} />
     </div>
   );
 };
@@ -91,7 +89,7 @@ const FundManagersSection = () => {
           <h3 className="text-[#111827] text-[24px] font-semibold leading-7">
             Fund Managers
           </h3>
-          <div className="mt-2 w-[120px] h-[3px] rounded-full" style={{ backgroundColor: PRIMARY }} />
+          <div className="mt-2 w-[120px] h-[3px] rounded-full bg-primary" />
         </div>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">

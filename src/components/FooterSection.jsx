@@ -1,5 +1,3 @@
-import React from "react";
-
 const footerCols = {
   quickLinks: ["About us", "All Funds", "Download Forms", "FAQs"],
   resources: [
@@ -31,9 +29,9 @@ const FooterSection = () => {
               <h4 className="text-white text-[16px] font-medium">Quick Links</h4>
               <div className="mt-5 space-y-3">
                 {footerCols.quickLinks.map((item) => (
-                  <p key={item} className="text-white text-[14px] leading-6">
+                  <a key={item} href="#" className="block text-white text-[14px] leading-6 hover:text-white/80 transition-colors">
                     {item}
-                  </p>
+                  </a>
                 ))}
               </div>
             </div>
@@ -42,9 +40,9 @@ const FooterSection = () => {
               <h4 className="text-white text-[16px] font-medium">Resources</h4>
               <div className="mt-5 space-y-3">
                 {footerCols.resources.map((item) => (
-                  <p key={item} className="text-white text-[14px] leading-6">
+                  <a key={item} href="#" className="block text-white text-[14px] leading-6 hover:text-white/80 transition-colors">
                     {item}
-                  </p>
+                  </a>
                 ))}
               </div>
             </div>

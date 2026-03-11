@@ -16,6 +16,8 @@ const TabsSection = () => {
   const sectionRef = useRef(null);
   const barRef = useRef(null);
   const tabsScrollRef = useRef(null);
+  const isManualScrolling = useRef(false);
+  const manualScrollTimer = useRef(null);
 
   useEffect(() => {
     const measure = () => {
@@ -37,6 +39,9 @@ const TabsSection = () => {
         return prev;
       });
 
+      // Skip active tab detection while a manual click-scroll is in progress
+      if (isManualScrolling.current) return;
+
       const scrollPosition = window.scrollY + (shouldFix ? barHeight + 60 : 180);
 
       for (let i = tabs.length - 1; i >= 0; i--) {
@@ -56,6 +61,7 @@ const TabsSection = () => {
     return () => {
       window.removeEventListener("resize", measure);
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(manualScrollTimer.current);
     };
   }, [barHeight]);
 
@@ -85,6 +91,13 @@ const TabsSection = () => {
     const topOffset = isFixed ? barHeight + 32 : 140;
     const sectionTop =
       section.getBoundingClientRect().top + window.pageYOffset - topOffset;
+
+    // Suppress scroll-based tab detection during smooth scroll
+    isManualScrolling.current = true;
+    clearTimeout(manualScrollTimer.current);
+    manualScrollTimer.current = setTimeout(() => {
+      isManualScrolling.current = false;
+    }, 1000);
 
     window.scrollTo({
       top: sectionTop,
